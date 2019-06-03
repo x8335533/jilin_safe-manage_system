@@ -1,0 +1,17 @@
+{% extends "safe_manage/base.html" %}
+{% block content %}
+<p><a href="{% url 'safe_manage:rectification' problem.id %}">{{problem.text|linebreaks}}</a></p>
+<p>修改整改措施：</p>
+<form action="{% url 'safe_manage:edit_rectification' problem.id %}" method='post'>
+{% csrf_token %}
+{{form.as_p}}
+<button name="submit">提交</button>
+</form>	
+
+
+
+
+
+
+{% endblock content %}
+

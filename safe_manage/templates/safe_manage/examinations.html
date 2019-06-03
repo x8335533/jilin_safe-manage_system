@@ -1,0 +1,30 @@
+{% extends "safe_manage/base.html" %}
+{% block header %}
+<h1>安全检查列表</h1>
+{% endblock header %}
+{% block content %}
+{% for e in examinations %}
+ <div class="panel panel-default">
+	 <div class="panel-heading">
+		 <h3>
+			 {{ e }}
+			
+		 </h3>
+		 <h4 class="text-right">
+		  <small>
+				 检查日期：{{ e.datecheck|date:'Y.m.d' }}
+			 </small>
+		</h4>	 
+	 </div>
+	 <div class="panel-body">
+		<a href="{% url 'safe_manage:problems' e.id %}">问题列表</a>
+	 </div>
+ </div>	 
+{% empty %}
+该时间段未进行安全检查
+{% endfor %}	 
+
+
+
+
+{% endblock content %}

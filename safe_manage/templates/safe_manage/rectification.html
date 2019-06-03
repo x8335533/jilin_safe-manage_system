@@ -1,0 +1,47 @@
+{% extends "safe_manage/base.html" %}
+{% block content %}
+<p>问题描述：</p>
+{%if problem.ifdone %}
+<p>{{ problem.text|linebreaks }}---------已整改</p>
+{% else %}
+<p>{{ problem.text|linebreaks }}---------未整改</p>
+{% if user.username == "jilinsafe"%}
+<p>
+<a href="{% url 'safe_manage:new_comment_pass' problem.id %}">整改合格</a>
+</p>
+{%endif%}
+{% endif %}
+
+<ul>
+	
+{% for r in rectification %}
+<li>
+<p>{{ r.text|linebreaks }}</p>
+<p>
+评价：{{r.comment.text|linebreaks}}
+</p>	
+{%if not problem.ifdone %}
+{% if user.username == "jilinsafe"%}
+<p>
+<a href="{% url 'safe_manage:new_comment' r.id %}">添加评价</a>	
+</p>
+{%endif%}
+{%endif%}	
+</li>	
+
+{% empty %}
+<li>
+还未上传任何整改措施
+<p>
+<a href="{% url 'safe_manage:new_rectification' problem.id %}">添加整改措施</a>
+</p>
+</li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+{% endblock content %}

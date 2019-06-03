@@ -1,0 +1,15 @@
+{% extends "safe_manage/base.html" %}
+{% block content %}
+<form action="{% url 'safe_manage:new_comment_pass' problem.id %}" method='post'>
+{% csrf_token %}
+{{form.as_p}}
+<button name="submit">提交</button>
+</form>	
+
+
+
+
+
+
+
+{% endblock content %}

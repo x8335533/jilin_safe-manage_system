@@ -1,0 +1,9 @@
+{% extends "safe_manage/base.html" %}
+{% block content %}
+<form method="post" action="{% url 'users:register' %}">
+{% csrf_token %}
+{{ form.as_p }}
+<button name="submit">确认</button>
+<input type="hidden" name="next" value="{% url 'safe_manage:index' %}" />
+</form>
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends "safe_manage/base.html" %}
+
+{% block content %}
+<p>
+检查：{{examination}}	
+</p>
+<p>检查出的问题列表:</p>
+<p>
+<a href="{% url 'safe_manage:new_problem' examination.id %}">添加新问题</a>
+</p>
+<ul>
+{% for p in problems %}
+<li>
+<p>{{ p.text|linebreaks }}</p>
+<table><tr>
+{% for i in imgproblem %}
+{%if i.Problem.id == p.id%}
+<td>	
+<img src = '{{i.img.url}}' height="230px">
+	
+</td>
+<td valign="bottom"><a href="{% url 'safe_manage:deleteimg' i.id %}">删除图片</a>	</td>
+{%endif%}	
+{% endfor %}
+</tr></table>
+
+<p>	
+<a href="{% url 'safe_manage:edit_problem' p.id %}">修改问题</a>
+</p>
+<p>
+<a href="{% url 'safe_manage:upload' p.id %}">上传图片</a>
+</p>	
+{%if p.ifdone %}
+<p>已整改--------<a href="{% url 'safe_manage:rectification' p.id %}">查看整改细节</a></p>
+{% else %}
+<p>未整改-------<a href="{% url 'safe_manage:rectification' p.id %}">查看整改细节</a></p>
+<p>{{ r.text|linebreaks }}</p>
+{% endif %}
+</li>
+
+
+
+
+
+{% empty %}
+<li>
+此次检查未发现问题
+</li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+{% endblock content %}

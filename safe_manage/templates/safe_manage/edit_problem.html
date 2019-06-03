@@ -1,0 +1,11 @@
+{% extends "safe_manage/base.html" %}
+{% block content %}
+{{examination}}
+<p>修改问题的内容：</p>
+<form action="{% url 'safe_manage:edit_problem' problem.id %}" method='post'>
+{% csrf_token %}
+{{form.as_p}}
+<button name="submit">提交修改</button>
+</form>
+
+{% endblock content %}

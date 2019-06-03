@@ -1,0 +1,15 @@
+{% extends "safe_manage/base.html" %}
+{% block content %}
+<p><a href="{% url 'safe_manage:problems' examination.id %}">{{examination}}</a></p>
+<p>添加一条问题：</p>
+<form action="{% url 'safe_manage:new_problem' examination.id %}" method='post'>
+{% csrf_token %}
+{{form.as_p}}
+<button name="submit">提交</button>
+</form>	
+
+
+
+
+
+{% endblock content %}
